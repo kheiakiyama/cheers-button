@@ -22,9 +22,8 @@ If you push [AWS IoT Button](https://aws.amazon.com/iotbutton), save metric `"1"
 After that, save metric `"0"`.
 
 ## Get started
-1. `git clone git@github.com:kheiakiyama/iot-button-metrics.git`
+1. `git clone git@github.com:kheiakiyama/chees-button.git`
 2. Copy `terraform.tfvars.example` to `terraform.tfvars` and edit variables
 3. `sh build_function.sh`
 4. `terraform apply`
-5. Set [AWS IoT Button](https://aws.amazon.com/iotbutton) call `send_used_metric`.  
-Each buttons, set placement attribute `DEVICE=button1`,`DEVICE=button2`,`DEVICE=button3`...  
+5. Set [AWS IoT Button](https://aws.amazon.com/iotbutton) call `send_webhook`.
