@@ -1,5 +1,5 @@
-resource "aws_iam_role" "iot_button_send_metric" {
-  name = "iot_button_send_metric"
+resource "aws_iam_role" "iot_button_send_webhook" {
+  name = "iot_button_send_webhook"
 
   assume_role_policy = <<EOF
 {
@@ -18,9 +18,9 @@ resource "aws_iam_role" "iot_button_send_metric" {
 EOF
 }
 
-resource "aws_iam_role_policy" "iot_button_send_metric" {
-  name = "iot_button_send_metric"
-  role = "${aws_iam_role.iot_button_send_metric.id}"
+resource "aws_iam_role_policy" "iot_button_send_webhook" {
+  name = "iot_button_send_webhook"
+  role = "${aws_iam_role.iot_button_send_webhook.id}"
 
   policy = <<EOF
 {
@@ -41,7 +41,7 @@ EOF
 resource "aws_lambda_function" "send_webhook" {
   filename         = "bin/send_webhook.zip"
   function_name    = "send_webhook"
-  role             = "${aws_iam_role.iot_button_send_metric.arn}"
+  role             = "${aws_iam_role.iot_button_send_webhook.arn}"
   handler          = "bin/send_webhook"
   source_code_hash = "${base64sha256(file("bin/send_webhook.zip"))}"
   runtime          = "go1.x"
