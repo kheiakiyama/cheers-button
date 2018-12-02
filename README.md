@@ -26,4 +26,5 @@ After that, save metric `"0"`.
 2. Copy `terraform.tfvars.example` to `terraform.tfvars` and edit variables
 3. `sh build_function.sh`
 4. `terraform apply`
-5. Set [AWS IoT Button](https://aws.amazon.com/iotbutton) call `send_webhook`.
+5. Set [AWS IoT Button](https://aws.amazon.com/iotbutton) call `send_webhook`.  
+Each buttons, set placement attribute `room=meeting room A`,`room=meeting room B`,`room=meeting room C`...  

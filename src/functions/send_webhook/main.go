@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,7 +13,7 @@ import (
 )
 
 type MyAttribute struct {
-	DEVICE string `json:"DEVICE"`
+	Room string `json:"room"`
 }
 
 type MyPlacementInfo struct {
@@ -23,11 +24,20 @@ type MyEvent struct {
 	PlacementInfo MyPlacementInfo `json:"placementInfo"`
 }
 
+type Payload struct {
+	Message string  `json:"message"`
+	Meta    MyEvent `json:"meta"`
+}
+
 // HandleRequest puts lastmodified to s3
 func HandleRequest(ctx context.Context, event MyEvent) (string, error) {
 	log.Print(event)
 	var webhookURL = os.Getenv("WEBHOOK_URL")
-	params, err := json.Marshal(event)
+	var message = os.Getenv("message")
+	var payload = Payload{
+		Message: fmt.Sprintf(message, event.PlacementInfo.Attributes.Room),
+		Meta:    event}
+	params, err := json.Marshal(payload)
 	if err != nil {
 		return "", err
 	}
