@@ -33,7 +33,9 @@ type Payload struct {
 func HandleRequest(ctx context.Context, event MyEvent) (string, error) {
 	log.Print(event)
 	var webhookURL = os.Getenv("WEBHOOK_URL")
-	var message = os.Getenv("message")
+	var message = os.Getenv("MESSAGE")
+	log.Print(message)
+	log.Print(fmt.Sprintf(message, event.PlacementInfo.Attributes.Room))
 	var payload = Payload{
 		Message: fmt.Sprintf(message, event.PlacementInfo.Attributes.Room),
 		Meta:    event}
